@@ -105,8 +105,9 @@ li {
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: #eee;
+  background-color: #e6e1e1;
   border-radius: 50%;
+  border: 1px solid black;
 }
 
 .all {
@@ -118,7 +119,7 @@ li {
 }
 
 .sidebar-label-container input:checked ~ .checkmark {
-  background-color: #2196f3;
+  background-color: #c2410c;
 }
 
 .checkmark:after {
@@ -187,5 +188,5 @@ body::-webkit-scrollbar-thumb {
   border-radius: 15px;   
       /* roundness of the scroll thumb */
   /* border: 3px solid orange;  */
-   /* creates padding around scroll thum b */
+   /* creates padding around scroll thumb */
 }
