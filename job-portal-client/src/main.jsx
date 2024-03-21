@@ -7,12 +7,13 @@ import Home from './pages/Home/Home';
 import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
 import LoginForm from './Components/LoginForm';
+import PostJobs from './pages/PostJobs/PostJobs';
 
 const router=createBrowserRouter(
  createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
         <Route path='' element={<Home/>} />
-        <Route path='contact' element={<Contact/>} />
+        <Route path='post-job' element={<PostJobs/>} />
         <Route path='about' element={<About/>} />
         <Route path='loginform' element={<LoginForm/>} />
     </Route>

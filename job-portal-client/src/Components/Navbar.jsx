@@ -12,7 +12,7 @@ function Navbar() {
     { path: "/my-job", title: "My Jobs" },
     { path: "/salary", title: "Salary Estimate" },
     { path: "/post-job", title: "Post a Job" },
-    { path: "/loginform", title: "LoginForm" },
+    { path: "/loginform", title: "LoginForm" }, 
   ];
   return (
     <header className="shadow sticky">
