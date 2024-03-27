@@ -12,7 +12,7 @@ function Layout() {
       {/* <Navbar/> */}
       <Navbar/>
         <Outlet/>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   )
 }
