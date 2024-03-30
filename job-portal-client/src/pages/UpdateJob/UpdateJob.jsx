@@ -1,8 +1,29 @@
+import React from "react";
+import { useLoaderData, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import CreatableSelect from "react-select/creatable";
 
-const PostJobs = () => {
+const UpdateJob = () => {
+  const { id } = useParams();
+  // console.log(id);
+  const {
+    _id,
+    jobTitle,
+    companyName,
+    minPrice,
+    maxPrice,
+    salaryType,
+    jobLocation,
+    postingDate,
+    experienceLevel,
+    companyLogo,
+    employmentType,
+    description,
+    postedBy,
+    skills,
+  } = useLoaderData();
+
   const {
     register,
     handleSubmit,
@@ -12,18 +33,18 @@ const PostJobs = () => {
 
   const onSubmit = (data) => {
     data.skills = selectedOption;
-    console.log(data)
-    // post jobs 
-    fetch("http://localhost:5000/post-jobs",{
-      method: "POST",
-      headers: {"content-type": "application/json" },
-      body:JSON.stringify(data)
+    console.log(data);
+    // post jobs
+    fetch(`http://localhost:5000/update-job/${id}`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result)
-        if(result.acknowledged===true){
-          alert("Job Posted Successfully!!!")
+        console.log(result);
+        if (result.acknowledged === true) {
+          alert("Job Updated Successfully!!!");
         }
         reset();
       });
@@ -42,7 +63,6 @@ const PostJobs = () => {
     { value: "DBMS", label: "DBMS" },
   ];
 
-  // console.log(watch("example")); // watch input value by passing the name of it
   return (
     <div className="max-w-screen-2xl cona tainer max-auto xl:px-24 px-4 h-[100vh] mt-24">
       {/* form  */}
@@ -54,7 +74,7 @@ const PostJobs = () => {
               <label className="block mb-2 text-lg">Job Title</label>
               <input
                 type="text"
-                defaultValue={"Web Developer"}
+                defaultValue={jobTitle}
                 {...register("jobTitle")}
                 className="create-job-input"
               />
@@ -63,6 +83,7 @@ const PostJobs = () => {
               <label className="block mb-2 text-lg">Company Name</label>
               <input
                 type="text"
+                defaultValue={companyName}
                 placeholder="EX:Microsoft"
                 {...register("companyName")}
                 className="create-job-input"
@@ -74,6 +95,7 @@ const PostJobs = () => {
             <div className="lg:w-1/2 w-full">
               <label className="block mb-2 text-lg">Minimun Salary</label>
               <input
+               defaultValue={minPrice}
                 type="text"
                 placeholder="20K"
                 {...register("minPrice")}
@@ -84,6 +106,7 @@ const PostJobs = () => {
               <label className="block mb-2 text-lg">Maximum Salary</label>
               <input
                 type="text"
+                defaultValue={maxPrice}
                 placeholder="120K"
                 {...register("maxPrice")}
                 className="create-job-input"
@@ -95,7 +118,7 @@ const PostJobs = () => {
             <div className="lg:w-1/2 w-full">
               <label className="block mb-2 text-lg">Salary Type</label>
               <select {...register("salaryType")} className="create-job-input">
-                <option value="">Choose Your Salary</option>
+                <option value={salaryType}>{salaryType  }</option>
                 <option value="Hourly">Hourly</option>
                 <option value="Monthly">Monthly</option>
                 <option value="Yearly">Yearly</option>
@@ -105,6 +128,7 @@ const PostJobs = () => {
               <label className="block mb-2 text-lg">Job Location</label>
               <input
                 type="text"
+                defaultValue={jobLocation }
                 placeholder="Ex: Delhi"
                 {...register("jobLocation")}
                 className="create-job-input"
@@ -118,6 +142,7 @@ const PostJobs = () => {
               <label className="block mb-2 text-lg">Job Posting Date</label>
               <input
                 type="date"
+                defaultValue={postingDate}
                 placeholder="Ex: 2022-10-05"
                 {...register("postingDate")}
                 className="create-job-input"
@@ -129,7 +154,7 @@ const PostJobs = () => {
                 {...register("experienceLevel")}
                 className="create-job-input"
               >
-                <option value="">Choose your experience</option>
+                <option value={experienceLevel}>{experienceLevel}</option>
                 <option value="NoExperince">NoExperince</option>
                 <option value="Internship">Internship</option>
                 <option value="Workremotly">Work Remotly</option>
@@ -140,7 +165,7 @@ const PostJobs = () => {
           <div>
             <label className="block mb-2 text-lg">Required Skill Sets:</label>
             <CreatableSelect
-              defaultValue={selectedOption}
+              defaultValue={skills}
               onChange={setSelectedOption}
               options={options}
               isMulti
@@ -153,6 +178,7 @@ const PostJobs = () => {
               <label className="block mb-2 text-lg">Company Logo</label>
               <input
                 type="url"
+                defaultValue={companyLogo}
                 placeholder="Paste Your company logo url: htttps://logo.com/img1"
                 {...register("companyLogo")}
                 className="create-job-input"
@@ -163,8 +189,9 @@ const PostJobs = () => {
               <select
                 {...register("employmentType")}
                 className="create-job-input"
+                
               >
-                <option value="">Select your job type</option>
+                <option value={employmentType}>{employmentType}</option>
                 <option value="Full-time">Full-time</option>
                 <option value="Part-time">Part-time</option>
                 <option value="Temporary">Temporary</option>
@@ -175,9 +202,7 @@ const PostJobs = () => {
           <div className="w-full">
             <label className="block mb-2 text-lg">Job Description</label>
             <textarea
-              defaultValue={
-                "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa"
-              }
+              defaultValue={description}
               {...register("description")}
               className="w-full pl-3 py-1.5 focus:outline-none placeholder:text-gray-700"
               rows={6}
@@ -190,6 +215,7 @@ const PostJobs = () => {
             <label className="block mb-2 text-lg">Job Posted by</label>
             <input
               type="email"
+              defaultValue={postedBy}
               placeholder="Your Email"
               {...register("postedBy")}
               className="create-job-input"
@@ -206,4 +232,4 @@ const PostJobs = () => {
   );
 };
 
-export default PostJobs;
+export default UpdateJob;

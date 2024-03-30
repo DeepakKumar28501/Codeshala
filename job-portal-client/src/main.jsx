@@ -8,6 +8,10 @@ import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
 import LoginForm from './Components/LoginForm';
 import PostJobs from './pages/PostJobs/PostJobs';
+import Myjobs from './pages/MyJobs/MyJobs';
+import SalaryPage from './pages/SalartPage/SalaryPage';
+import UpdateJob from './pages/UpdateJob/UpdateJob';
+import Login from './Components/Login';
 
 const router=createBrowserRouter(
  createRoutesFromElements(
@@ -16,6 +20,10 @@ const router=createBrowserRouter(
         <Route path='post-job' element={<PostJobs/>} />
         <Route path='about' element={<About/>} />
         <Route path='loginform' element={<LoginForm/>} />
+        <Route path='myjob' element={<Myjobs/>} />
+        <Route path='salary' element={<SalaryPage/>} />
+        <Route path='login' element={<Login/>} />
+        <Route path='edit-job/:id' element={<UpdateJob/>} loader={({params})=>fetch(`http://localhost:5000/all-jobs/${params.id}`)} />
     </Route>
  )
 )

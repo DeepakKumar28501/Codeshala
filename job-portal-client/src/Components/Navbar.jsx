@@ -9,7 +9,7 @@ function Navbar() {
   };
   const navItems = [
     { path: "/", title: "Start a seach" },
-    { path: "/my-job", title: "My Jobs" },
+    { path: "/myjob", title: "My Jobs" },
     { path: "/salary", title: "Salary Estimate" },
     { path: "/post-job", title: "Post a Job" },
     { path: "/loginform", title: "LoginForm" }, 
